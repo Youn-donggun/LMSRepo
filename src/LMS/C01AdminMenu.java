@@ -74,9 +74,11 @@ public class C01AdminMenu {
 			break;
 		case 9:
 			//Main 메뉴로 돌아갑니다
+			System.out.println("Main 메뉴로 돌아갑니다");
 			return ;
 		default :
 			//잘못입력 다시
+			System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
 						
 		}
 			

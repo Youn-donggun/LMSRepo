@@ -6,7 +6,7 @@ import java.util.Scanner;
 class C01Teacher
 {
 	String TID;
-	String name;
+	String Name;
 	String Subject;
 	String Email;
 }
@@ -20,11 +20,10 @@ public class C01TeacherMenu {
 	//S에 저장 
 	
 	ArrayList<C01Teacher> Tchlist = new ArrayList();
-	int Curidx;	// 현재 로그인한 교수 Idx 저장
+	C01Teacher CurIdx;	// 현재 로그인한 교수 Idx 저장
 	
 	Scanner sc = new Scanner(System.in);
-	int no;
-	
+	int no = 0;
 	void run() {
 		while(true)
 		{
@@ -45,16 +44,43 @@ public class C01TeacherMenu {
 			//계정 가입
 			//C01Teacher객체 만들고 각멤버에 값 넣어서 
 			//(교수ID , 교수이름 , 교수과목, 이메일주소)
-			//ArrayList에 저장 
+			//ArrayList에 저장
+			C01Teacher tch = new C01Teacher();
+			//각정보 입력한 후
+			System.out.print("ID : ");
+			tch.TID = sc.next();
+			System.out.print("Name : ");
+			tch.Name = sc.next();
+			System.out.print("Subject : ");
+			tch.Subject = sc.next();
+			System.out.print("Email : ");
+			tch.Email = sc.next();
+			//ArrayList에 추가합니다
+			Tchlist.add(tch);
+			System.out.println("계정 등록 완료!");
 			break;
 		case 2:
 			//로그인
 			//ArrayList에 해당 TId가 있는 idx를 CurIdx에 저장
+			sc.nextLine();
+			System.out.print("ID : ");
+		    String id = sc.nextLine();
+		    
+		    for(C01Teacher teacher : Tchlist) {
+		        if(teacher.TID.equals(id)) {
+			        System.out.println("[" + teacher.TID + "]님께서 로그인 하셨습니다.");
+			        CurIdx = teacher;
+		        } else {
+			        System.out.println("등록되지 않은 ID입니다.");
+		        } 
+		    }
 			break;
 		case 3:
 			//로그아웃
 			//CurIdx 에 9999값 넣음 
-			break;
+			CurIdx = null;
+			System.out.println("로그아웃합니다");
+			return;
 		case 4:
 			//출석부
 			//S안에 있는 내용 참고해서 idx에 있는 교수과목과 동일한
@@ -63,6 +89,14 @@ public class C01TeacherMenu {
 		case 5:
 			//정보변경
 			//해당 idx에 있는 정보 변경 
+			System.out.println("교수 정보를 수정합니다.(ID제외)");
+			System.out.print("Name : ");
+			CurIdx.Name = sc.next();
+			System.out.print("Subject : ");
+			CurIdx.Subject = sc.next();
+			System.out.print("Email : ");
+			CurIdx.Email = sc.next();
+			System.out.println("수정 완료!");
 			break;
 		case 6:
 			//계정삭제
@@ -70,9 +104,11 @@ public class C01TeacherMenu {
 			break;
 		case 7:
 			//종료
-			return ;
+			System.out.println("종료합니다");
+			return;
 		default :
 			//잘못입력 다시
+			System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
 		}
 		
 		}
