@@ -15,6 +15,7 @@ public class C01TeacherMenu {
 	
 	//출석부용
 	C01StudentMenu S;
+	C01Teacher tch = new C01Teacher();
 	
 	//생성자를 이용해서 메인메뉴에서 만든 학생객체의 주소를 받아
 	//S에 저장 
@@ -45,8 +46,6 @@ public class C01TeacherMenu {
 			//C01Teacher객체 만들고 각멤버에 값 넣어서 
 			//(교수ID , 교수이름 , 교수과목, 이메일주소)
 			//ArrayList에 저장
-			C01Teacher tch = new C01Teacher();
-			//각정보 입력한 후
 			System.out.print("ID : ");
 			tch.TID = sc.next();
 			System.out.print("Name : ");
@@ -55,8 +54,8 @@ public class C01TeacherMenu {
 			tch.Subject = sc.next();
 			System.out.print("Email : ");
 			tch.Email = sc.next();
-			//ArrayList에 추가합니다
 			Tchlist.add(tch);
+			System.out.println(Tchlist);
 			System.out.println("계정 등록 완료!");
 			break;
 		case 2:
@@ -100,7 +99,11 @@ public class C01TeacherMenu {
 			break;
 		case 6:
 			//계정삭제
-			//해당 idx에 있는 정보 삭제 
+			//해당 idx에 있는 정보 삭제
+			System.out.print("삭제할 ID : ");
+			tch.TID = sc.next();
+			Tchlist.remove(tch);
+			System.out.println("계정 삭제 완료!");
 			break;
 		case 7:
 			//종료
