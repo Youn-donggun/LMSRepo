@@ -17,10 +17,11 @@ public class C01StudentMenu {
 	
 	ArrayList<C01Student> Stdlist = new ArrayList();
 	C01Student CurIdx;	// 현재 로그인한 학생 객체 저장  
-	
+	C01TeacherMenu T;
 	Scanner sc = new Scanner(System.in);
 	String str;
-	void run() {
+	void run(C01TeacherMenu t) {
+		this.T=t;
 		while(true)
 		{
 		System.out.println("------------ 학생메뉴 -------------");
@@ -88,7 +89,11 @@ public class C01StudentMenu {
 			}
 			break;
 		case "5":
-			//CurIdx에 있는 학생 정보객체에 과목을 입력받아 저장 
+			//CurIdx에 있는 학생 정보객체에 과목을 입력받아 저장
+			System.out.print("신청 가능한 과목 : ");
+			for(C01Teacher teacher : T.Tchlist) {
+				System.out.print(teacher.Subject);
+			}
 			System.out.print("신청할 과목 수 : ");
 			int count = sc.nextInt();
 			CurIdx.Subject = new String[count];
@@ -157,7 +162,7 @@ public class C01StudentMenu {
 			break;
 		case "9":
 			//종료
-			System.out.println("종료합니다");
+			System.out.println("Main 메뉴로 돌아갑니다");
 			return;
 		default:
 			//잘못입력 다시

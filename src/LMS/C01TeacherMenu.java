@@ -15,7 +15,7 @@ public class C01TeacherMenu {
 	
 	//출석부용
 	C01StudentMenu S;
-	C01Teacher tch = new C01Teacher();
+	
 	
 	//생성자를 이용해서 메인메뉴에서 만든 학생객체의 주소를 받아
 	//S에 저장 
@@ -44,6 +44,7 @@ public class C01TeacherMenu {
 		case "1":
 			//계정 가입
 			//C01Teacher객체 만들고 각멤버에 값 넣어서 
+			C01Teacher tch = new C01Teacher();
 			//(교수ID , 교수이름 , 교수과목, 이메일주소)
 			//ArrayList에 저장
 			System.out.print("교수 ID : ");
@@ -119,7 +120,7 @@ public class C01TeacherMenu {
 			break;
 		case "7":
 			//종료
-			System.out.println("종료합니다");
+			System.out.println("Main 메뉴로 돌아갑니다");
 			return;
 		default :
 			//잘못입력 다시
