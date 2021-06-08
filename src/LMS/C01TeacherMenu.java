@@ -21,10 +21,14 @@ public class C01TeacherMenu {
 	//S에 저장 
 	
 	ArrayList<C01Teacher> Tchlist = new ArrayList();
-	C01Teacher CurIdx;	// 현재 로그인한 교수 Idx 저장
+	int CurIdx;	// 현재 로그인한 교수 Idx 저장
 	
 	Scanner sc = new Scanner(System.in);
 	String str;
+	void setS(C01StudentMenu S)
+	{
+		this.S = S;
+	}
 	void run() {
 		while(true)
 		{
@@ -63,21 +67,30 @@ public class C01TeacherMenu {
 			//ArrayList에 해당 TId가 있는 idx를 CurIdx에 저장
 			sc.nextLine();
 			System.out.print("교수 ID : ");
-		    String id = sc.nextLine();
-		    
-		    for(C01Teacher teacher : Tchlist) {
-		        if(teacher.TID.equals(id)) {
-			        System.out.println("[" + teacher.TID + "]님께서 로그인 하셨습니다.");
-			        CurIdx = teacher;
-		        } else {
-			        System.out.println("등록되지 않은 ID입니다.");
-		        } 
-		    }
+		    String ID = sc.nextLine();
+		    boolean flag=false;
+			for(int i=0;i<Tchlist.size();i++)
+			{
+				if(ID.equals(Tchlist.get(i).Name))
+				{
+					CurIdx=i;
+					System.out.println("로그인 성공");
+					break;
+				}
+			}
+			if(flag==true)
+			{
+				System.out.println("로그인 성공");
+			}
+			else
+			{
+				System.out.println("로그인 실패");
+			}
 			break;
 		case "3":
 			//로그아웃
 			//CurIdx 에 9999값 넣음 
-			CurIdx = null;
+			CurIdx = 9999;
 			System.out.println("로그아웃합니다");
 			return;
 		case "4":
@@ -88,34 +101,70 @@ public class C01TeacherMenu {
 		case "5":
 			//정보변경
 			//해당 idx에 있는 정보 변경 
-			System.out.println("교수 정보를 수정합니다.(ID제외)");
-			System.out.print("교수 이름 : ");
-			CurIdx.Name = sc.next();
-			System.out.print("교수 과목 : ");
-			CurIdx.Subject = sc.next();
-			System.out.print("이메일 주소 : ");
-			CurIdx.Email = sc.next();
-			System.out.println("수정 완료!");
+			if(CurIdx==9999)
+			{
+				System.out.println("로그인하세요");
+			}
+			else
+			{
+				System.out.println("1 교수 ID   : "+Tchlist.get(CurIdx).TID);
+				System.out.println("2 교수 이름  : "+Tchlist.get(CurIdx).Name);
+				System.out.println("3 교수 과목  : "+Tchlist.get(CurIdx).Subject);
+				System.out.println("4 이메일 주소 : "+Tchlist.get(CurIdx).Email);
+				System.out.print("수정할 정보 번호 입력 : ");
+				str = sc.next();
+				sc.nextLine();
+				switch(str)
+				{
+				case "1":
+					System.out.print("변경할 ID 입력 : ");
+					String tmpID = sc.nextLine();
+					Tchlist.get(CurIdx).TID = tmpID;
+					break;
+				case "2":
+					System.out.print("변경할 이름 입력 : ");
+					String tmpName = sc.nextLine();
+					Tchlist.get(CurIdx).Name = tmpName;
+					break;
+				case "3":
+					System.out.print("변경할 과목 입력 : ");
+					String tmpSub = sc.nextLine();
+					Tchlist.get(CurIdx).Subject = tmpSub;
+					break;
+				case "4":
+					System.out.print("변경할 이메일 주소 입력 : ");
+					String tmpEmail = sc.nextLine();
+					Tchlist.get(CurIdx).Email = tmpEmail;
+					break;
+				default:
+					System.out.print("잘못 입력하셨습니다");
+				
+				}
+			}
 			break;
 		case "6":
 			//계정삭제
 			//해당 idx에 있는 정보 삭제
-			System.out.print("ID를 입력해주세요 : ");
-			String delID = sc.next();
-			try {
-				if(CurIdx.TID.equals(delID)) {
-					System.out.println("정말로 삭제 하시겠습니까?(\"네\"라고 입력)");
-					String confirm = sc.next();
-					if(confirm.equals("네")) {
-						Tchlist.remove(CurIdx);
-						System.out.println("계정 삭제 완료");
-						CurIdx = null;
-					}
-		        } else {
-			        System.out.println("ID가 틀립니다.");
-		        }
-			} catch (Exception e) {
-		        System.out.println("ID가 틀립니다.");
+			if(CurIdx==9999)
+			{
+				System.out.println("로그인하세요");
+			}
+			else
+			{
+				System.out.println("정말 삭제할 건가요?");
+				String tmp=sc.next();
+				if(tmp.equals("Y")||tmp.equals("y")
+						||tmp.equals("YES")||tmp.equals("yes")||tmp.equals("Yes")
+						||tmp.equals("네")||tmp.equals("예")
+						||tmp.equals("응")||tmp.equals("그래")||tmp.equals("오냐"))
+				{
+				Tchlist.remove(CurIdx);
+				System.out.println("계정 삭제 성공!");
+				}
+				else
+				{
+					System.out.println("계정 삭제 실패");
+				}
 			}
 			break;
 		case "7":
