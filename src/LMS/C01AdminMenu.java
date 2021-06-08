@@ -47,6 +47,9 @@ public class C01AdminMenu {
 		case "1":
 			//가입교수 리스트
 			//현재 저장된 교수 정보가 출력됩니다
+			for(C01Teacher teacher : T.Tchlist) {
+				System.out.println(teacher.TID);
+			}
 			break;
 		case "2":
 			//가입학생 리스트
@@ -87,7 +90,25 @@ public class C01AdminMenu {
 			//배정받은 강의실 정보 출력 합니다 
 			break;
 		case "7":
-			//교수ID를 입력받아 해당ID를  리스트에서 삭제합니다
+			//교수ID를 입력받아 해당ID를  리스트에서 삭제합니다\
+			System.out.print("ID를 입력해주세요 : ");
+			String delTID = sc.next();
+			for(C01Teacher teacher : T.Tchlist) {
+				if(teacher.TID.equals(delTID)) {
+					System.out.println("정말로 삭제 하시겠습니까?");
+					String confirm = sc.next();
+					if(confirm.equals("Y")||confirm.equals("y")
+					||confirm.equals("YES")||confirm.equals("yes")||confirm.equals("Yes")
+					||confirm.equals("네")||confirm.equals("예")
+					||confirm.equals("응")||confirm.equals("그래")||confirm.equals("오냐"))
+					{
+					T.Tchlist.remove(teacher);
+					System.out.println("계정 삭제 완료");
+					}
+				}else	{
+						System.out.println("해당하는 ID가 없습니다. ");
+					}
+				}
 			break;
 		case "8":
 			//학생ID를 입력받아 해당ID를  리스트에서 삭제합니다
